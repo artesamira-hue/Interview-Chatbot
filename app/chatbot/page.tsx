@@ -24,10 +24,8 @@ export default function Chatbot() {
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const savedSearch = sessionStorage.getItem('chatbot-search')
     const savedData = sessionStorage.getItem('chatbot-data')
 
-    if (savedSearch !== null) setSearch(savedSearch)
     if (savedData !== null) {
       try {
         setData(JSON.parse(savedData))
@@ -43,8 +41,7 @@ export default function Chatbot() {
   useEffect(() => {
     if (!isLoaded) return
 
-    localStorage.setItem('chatbot-search', search)
-    localStorage.setItem('chatbot-data', JSON.stringify(data))
+    sessionStorage.setItem('chatbot-data', JSON.stringify(data))
   }, [search, data, isLoaded])
 
   const fetchData = async () => {
